@@ -29,7 +29,7 @@ const Hero = () => {
       <div className="xl:flex-[1.5] flex justify-end items-end w-full xl:h-screen">
         <div className="xl:w-full w-[90%] xl:h-full h-[590px] relative ">
           <Image
-            src="/hero.png"
+            src="/hero.webp"
             alt="hero-img"
             fill
             className="object-contain"
