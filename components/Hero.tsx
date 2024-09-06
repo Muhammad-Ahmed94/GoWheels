@@ -20,28 +20,21 @@ const Hero = () => {
         </p>
 
         <CustomButton
-          title="explore cars"
+          title="Explore cars"
           containerStyles="bg-blue-500 text-white rounded mt-10"
           handleClick={handleScroll}
         />
       </div>
 
-      <div>
-        <div className="relative">
+      <div className="xl:flex-[1.5] flex justify-end items-end w-full xl:h-screen">
+        <div className="xl:w-full w-[90%] xl:h-full h-[590px] relative ">
           <Image
             src="/hero.png"
-            alt="hero-image"
-            height={40}
-            width={40}
-            className="z-10 absolute bottom-0 right-0"
+            alt="hero-img"
+            fill
+            className="object-contain"
           />
-          <Image
-            src="/hero-bg.png"
-            alt="hero-overlay"
-            height={40}
-            width={60}
-            className="z-0"
-          />
+          <div className='hero__image-overlay' />
         </div>
       </div>
     </div>
