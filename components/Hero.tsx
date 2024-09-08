@@ -1,13 +1,14 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Image from 'next/image'
+import Image from 'next/image';
+import React from 'react';
+
 import CustomButton from './CustomButton';
 
 const Hero = () => {
   const handleScroll = () => {
-    alert('explore more')
-  }
+    alert("explore more");
+  };
 
   return (
     <div className="flex xl:flex-row flex-col relative gap-5 w-screen mx-auto">
@@ -33,12 +34,13 @@ const Hero = () => {
             alt="hero-img"
             fill
             className="object-contain"
+            loading="lazy"
           />
-          <div className='hero__image-overlay' />
+          <div className="hero__image-overlay" />
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default Hero
+export default Hero;
