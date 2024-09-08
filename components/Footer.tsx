@@ -6,7 +6,7 @@ import { footerLinks } from '@/constants';
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col flex-wrap px-12 border-t border-gray-300">
+    <footer className="flex flex-col flex-wrap px-10 border-t border-gray-300">
       <div className="flex max-md:flex-col flex-wrap justify-between gap-5 my-5">
         <div className="flex flex-col gap-1">
           <Image src="/logo.webp" alt="logo" width={90} height={90} />
