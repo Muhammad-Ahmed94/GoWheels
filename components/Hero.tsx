@@ -1,9 +1,9 @@
 "use client";
 
-import Image from 'next/image';
-import React from 'react';
+import Image from "next/image";
+import React from "react";
 
-import CustomButton from './CustomButton';
+import CustomButton from "./CustomButton";
 
 const Hero = () => {
   const handleScroll = () => {
@@ -36,8 +36,8 @@ const Hero = () => {
             className="object-contain"
             loading="lazy"
           />
-          <div className="hero__image-overlay" />
         </div>
+        <div className="hero__image-overlay" />
       </div>
     </div>
   );
