@@ -8,7 +8,7 @@ const Navbar = () => {
     <header className="w-full flex absolute z-10 mx-auto">
       <nav className="pt-6 px-12 w-full sm:px-7 flex justify-between items-center">
         <Link href="/" className="flex justify-center items-center">
-          <Image src="/logo.jpg" alt="logo" width={90} height={90} />{" "}
+          <Image src="/logo.webp" alt="logo" width={90} height={90} />{" "}
           <span className="ml-1 font-bold">GoWheels</span>
         </Link>
 
