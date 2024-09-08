@@ -10,7 +10,7 @@ const CustomButton = ({
 }: {
   title: string;
   containerStyles: string;
-  handleClick: MouseEventHandler<HTMLButtonElement>;
+  handleClick?: MouseEventHandler<HTMLButtonElement>;
 }) => {
   return (
     <button
