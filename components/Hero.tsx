@@ -34,7 +34,7 @@ const Hero = () => {
             alt="hero-img"
             fill
             className="object-contain"
-            loading="lazy"
+            loading="eager"
           />
         </div>
         <div className="hero__image-overlay" />
