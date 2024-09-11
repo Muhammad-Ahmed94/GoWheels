@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 import { CarCard, Hero } from '@/components';
 import { fecthCars } from '@/utils';
 
@@ -23,7 +21,7 @@ export default async function Home() {
 
         {!response ? (
           <section className="mt-4 mb-8 border-t-2 border-gray-300">
-            <div className="grid grid-cols-2 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 p-2">
+            <div className="grid grid-cols-2 gap-2 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 p-2">
               {allCars.map((car) => (
                 <CarCard car={car} />
               ))}
@@ -36,6 +34,7 @@ export default async function Home() {
             <p>could fecth data from api</p>
           </div>
         )}
+        
       </div>
     </main>
   );
