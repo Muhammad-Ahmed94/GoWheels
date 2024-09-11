@@ -69,7 +69,7 @@ const CarCard = ({ car }: CarProps) => {
 
       <CustomButton title="View More" containerStyles="bg-blue-500 text-white rounded-full w-full hover:bg-blue-400 hover:shadow-md" handleClick={() => setIsOpen(true)} />
 
-        {isOpen ? (<CarDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car} />) : ""}
+        <CarDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car} />
     </div>
   );
 };

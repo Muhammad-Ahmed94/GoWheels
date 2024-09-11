@@ -8,7 +8,7 @@ export interface CustomButtonProps {
 
 export interface CarCardProps {
   city_mpg: number;
-  class: string
+  vehicle_class: string
   combination_mpg: number;
   cylinders: number;
   displacement: number;
