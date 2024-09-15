@@ -1,3 +1,5 @@
+'use client';
+
 import { CarCard, Hero } from '@/components';
 import { fecthCars } from '@/utils';
 
