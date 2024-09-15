@@ -1,6 +1,6 @@
 import { CarCardProps } from '@/types';
 import { Button, Dialog, DialogPanel, DialogTitle, Transition } from '@headlessui/react';
-import React from 'react'
+import React, { Fragment } from 'react'
 import CustomButton from './CustomButton';
 import Image from 'next/image';
 
@@ -19,7 +19,7 @@ const CarDetails = ({ isOpen, closeModal, car}: CarDetailsProps) => {
         <Dialog
           open={isOpen}
           as="div"
-          className="relative z-10 focus:outline-none"
+          className="relative z-10 focus:outline-none transition duration-300 ease-out"
           onClose={closeModal}
         >
           <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -29,35 +29,67 @@ const CarDetails = ({ isOpen, closeModal, car}: CarDetailsProps) => {
                 transition
                 className="w-1/3 max-w-md h-[90vh] rounded-xl bg-black bg-opacity-30 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
               >
-                <DialogTitle
-                  as="h3"
-                  className="text-base/7 font-medium text-white"
-                >
-                  {make.toUpperCase()}_{model.toUpperCase()}_{year}
-                </DialogTitle>
-                <div className="mt-2 text-sm/6 text-white/50 ">
+                {/* top image with hero oevrlay */}
+                <div className="w-full relative h-[25vh] flex justify-center items-center bg-white/90 rounded-md">
+                  <Image
+                    src="/pattern.webp"
+                    alt="pattern-image"
+                    fill
+                    className="object-contain w-full absolute"
+                  />
+                  {/* hero image */}
                   <Image
                     src="/hero.webp"
-                    alt="car-image"
-                    fill
-                    className="object-contain relative"
+                    alt="hero-image"
+                    width={250}
+                    height={250}
+                    className="relative z-20 object-contain"
                   />
-
-                  <ul className="list-none flex flex-col gap-4 text-lg justify-start items-start">
-                    <li>Mileage: {city_mpg}</li>
-                    <li>Drive Mode: {drive.toUpperCase()}</li>
-                    <li>
-                      Gear Shift:{" "}
-                      {transmission === "a" ? "Automatic" : "Manual"}
-                    </li>
-                    <li>Combination: {combination_mpg}</li>
-                    <li>Cylinder: {cylinders}</li>
-                    <li>Engine Displacement: {displacement}</li>
-                    <li>Fuel Type: {fuel_type}</li>
-                    <li>Highway MPG: {highway_mpg}</li>
-                    <li>Vehicle Class: {vehicle_class}</li>
-                  </ul>
                 </div>
+                {/* 3 car sides images */}
+                <div className="flex justify-between rounded mt-2 bg-white/80">
+                  <Image
+                    src="/hero.webp"
+                    alt="side-image"
+                    width={100}
+                    height={100}
+                    className="object-conver rounded-md"
+                  />
+                  <Image
+                    src="/hero.webp"
+                    alt="side-image"
+                    width={100}
+                    height={100}
+                    className="object-conver rounded-md"
+                  />
+                  <Image
+                    src="/hero.webp"
+                    alt="side-image"
+                    width={100}
+                    height={100}
+                    className="object-conver rounded-md"
+                  />
+                </div>
+                <DialogTitle
+                  as="h3"
+                  className="text-lg font-bold text-white capitalize mt-4 underline"
+                >
+                  {make} {model} {year}
+                </DialogTitle>
+
+                {/* Car detaisl */}
+                {Object.entries(car).map(([key, value]) => (
+                  <div
+                    className="flex justify-between gap-5 w-full text-right text-white/80"
+                    key={key}
+                  >
+                    <h4 className="font-semibold capitalize">
+                      {key.replace("_", " ")}:
+                    </h4>
+                    <p className="font-bold capitalize">{value}</p>
+                  </div>
+                ))}
+
                 <div className="mt-4">
                   <Button
                     className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
@@ -71,14 +103,6 @@ const CarDetails = ({ isOpen, closeModal, car}: CarDetailsProps) => {
           </div>
         </Dialog>
       </Transition>
-      {/* {isOpen && (
-        <div className='relative h-screen w-screen bg-black bg-opacity-30 flex z-10'>
-            <div className='fixed inset-0 bg-white/25 rounded-lg h-8 w-10 p-2 z-20'>
-                <h1>hey there</h1>
-                <CustomButton title='close' containerStyles='bg-blue-500 rounded-lg text-white' handleClick={closeModal} />
-            </div>
-        </div>
-    )} */}
     </>
   );
 }
