@@ -1,5 +1,8 @@
 'use client';
 
+import Image from 'next/image';
+import React, { useState } from 'react';
+
 import { CarCard, Hero } from '@/components';
 import { fecthCars } from '@/utils';
 
@@ -19,6 +22,23 @@ export default async function Home() {
           <h1 className="text-4xl font-bold">Cars Catalogue</h1>
           {/* <p>We got cars you like</p> */}
           <p className="text-md text-gray-500">You like_we provide</p>
+
+          <div className="flex w-full items-center justify-center gap-1 border border-black rounded bg-white/60">
+            <input
+              type="text"
+              className="rounded p-2 focus:outline-none bg-white/60"
+              placeholder="eg. lamborghini huracan"
+            />
+            <button type='submit' title="button">
+              <Image
+                src="/mag-glass.svg"
+                alt="search-icon"
+                width={30}
+                height={30}
+                className="rounded"
+              />
+            </button>
+          </div>
         </div>
 
         {!response ? (
@@ -36,7 +56,6 @@ export default async function Home() {
             <p>could fecth data from api</p>
           </div>
         )}
-        
       </div>
     </main>
   );

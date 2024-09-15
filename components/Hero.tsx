@@ -37,7 +37,8 @@ const Hero = () => {
             loading="eager"
           />
         </div>
-        <div className="hero__image-overlay" />
+        {/* <div className="hero__image-overlay" /> also include bg-hero-bg in globals css */}
+        <div className="hero__image-overlay"><Image src='/hero-bg.webp' alt="hero-overlay" fill /></div>
       </div>
     </div>
   );

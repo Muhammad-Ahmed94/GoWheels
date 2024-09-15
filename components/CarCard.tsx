@@ -18,8 +18,8 @@ const CarCard = ({ car }: CarProps) => {
   return (
     <div className="flex flex-col justify-start items-start p-6 rounded-2xl hover:bg-white bg-slate-100 hover:shadow-md">
       <div className="flex justify-start">
-        <h1 className="font-bold text-[16px]">
-          {make.toUpperCase()} {model.toUpperCase()} {year}
+        <h1 className="font-bold text-[20px] capitalize">
+          {make} {model} {year}
         </h1>
       </div>
 
