@@ -1,9 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import CustomButton from "./CustomButton";
+'use client';
+
+import { signInWithPopup } from 'firebase/auth';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react';
+
+import { auth, googleProvider } from '@/auth';
+
+import CustomButton from './CustomButton';
 
 const Navbar = () => {
+  // const [user, setUser] = useState(null)
+
+  const handleGoogleSignIn = async () => {
+    alert("trying to sign in bithc")
+  }
+
   return (
     <header className="w-full flex absolute z-10 mx-auto">
       <nav className="pt-6 px-12 w-full sm:px-7 flex justify-between items-center">
@@ -15,6 +27,7 @@ const Navbar = () => {
         <CustomButton
           title="Sign In"
           containerStyles="bg-blue-400 text-white font-bold rounded"
+          handleClick={handleGoogleSignIn}
         />
       </nav>
     </header>
