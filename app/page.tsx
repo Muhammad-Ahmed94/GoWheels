@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -7,6 +7,7 @@ import { CarCard, Hero } from '@/components';
 import { fecthCars } from '@/utils';
 
 export default async function Home() {
+  const [carName, setCarName] = useState("")
   const allCars = await fecthCars();
 
   //* API endpoint & response data checkpoint.
@@ -25,11 +26,12 @@ export default async function Home() {
 
           <div className="flex w-full items-center justify-center gap-1 border border-black rounded bg-white/60">
             <input
+            onChange={e => setCarName(e.target.value)}
               type="text"
               className="rounded p-2 focus:outline-none bg-white/60"
               placeholder="eg. lamborghini huracan"
             />
-            <button type='submit' title="button">
+            <button type="submit" title="button" onClick={() => {console.log('search car');}}>
               <Image
                 src="/mag-glass.svg"
                 alt="search-icon"
