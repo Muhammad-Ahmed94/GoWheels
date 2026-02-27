@@ -1,110 +1,124 @@
-import { CarCardProps } from '@/types';
-import { Button, Dialog, DialogPanel, DialogTitle, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react'
-import CustomButton from './CustomButton';
-import Image from 'next/image';
+"use client";
+
+import { CarCardProps } from "@/types";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+} from "@headlessui/react";
+import React, { Fragment, useState } from "react";
+import Image from "next/image";
+import RentModal from "./RentModal";
+import { calculateRentPrice } from "@/utils";
 
 interface CarDetailsProps {
-    isOpen: boolean;
-    closeModal: () => void;
-    car: CarCardProps;
+  isOpen: boolean;
+  closeModal: () => void;
+  car: CarCardProps;
 }
 
-const CarDetails = ({ isOpen, closeModal, car}: CarDetailsProps) => {
-  const { city_mpg, make, model, year, transmission, drive, vehicle_class, combination_mpg, cylinders, displacement, fuel_type, highway_mpg } = car;
+const displayLabels: Record<string, string> = {
+  make: "Make",
+  model: "Model",
+  year: "Year",
+  class: "Class",
+  drive: "Drive",
+  transmission: "Transmission",
+  fuel_type: "Fuel Type",
+  cylinders: "Cylinders",
+  displacement: "Displacement",
+};
+
+const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
+  const [rentOpen, setRentOpen] = useState(false);
+  const rentPrice = calculateRentPrice(car);
+
+  const filteredEntries = Object.entries(car).filter(
+    ([key, value]) =>
+      (key in displayLabels && typeof value !== "string") ||
+      (typeof value === "string" && !value.includes("premium")),
+  );
 
   return (
     <>
-      <Transition show={isOpen}>
-        <Dialog
-          open={isOpen}
-          as="div"
-          className="relative z-10 focus:outline-none transition duration-300 ease-out"
-          onClose={closeModal}
-        >
-          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div className="absolute inset-0 w-screen h-screen bg-black bg-opacity-30 rounded-lg" />
-            <div className="flex min-h-full items-center justify-center p-4 z-10">
-              <DialogPanel
-                transition
-                className="w-1/3 max-w-md h-[90vh] rounded-xl bg-black bg-opacity-30 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
-              >
-                {/* top image with hero oevrlay */}
-                <div className="w-full relative h-[25vh] flex justify-center items-center bg-white/90 rounded-md">
+      <Transition show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <div className="fixed inset-0 bg-black/40 z-10" />
+          <div className="fixed inset-0 z-20 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4">
+              <DialogPanel className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl relative">
+                <button
+                  onClick={closeModal}
+                  className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                >
+                  <Image src="/close.svg" alt="close" width={14} height={14} />
+                </button>
+
+                <div className="relative w-full h-48 bg-blue-50 rounded-xl overflow-hidden">
                   <Image
                     src="/pattern.webp"
-                    alt="pattern-image"
+                    alt="pattern"
                     fill
-                    className="object-contain w-full absolute"
+                    className="object-cover opacity-40"
                   />
-                  {/* hero image */}
                   <Image
                     src="/hero.webp"
-                    alt="hero-image"
-                    width={250}
-                    height={250}
-                    className="relative z-20 object-contain"
+                    alt={`${car.make} ${car.model}`}
+                    fill
+                    className="object-contain relative z-10 p-4"
                   />
                 </div>
-                {/* 3 car sides images */}
-                <div className="flex justify-between rounded mt-2 bg-white/80">
-                  <Image
-                    src="/hero.webp"
-                    alt="side-image"
-                    width={100}
-                    height={100}
-                    className="object-conver rounded-md"
-                  />
-                  <Image
-                    src="/hero.webp"
-                    alt="side-image"
-                    width={100}
-                    height={100}
-                    className="object-conver rounded-md"
-                  />
-                  <Image
-                    src="/hero.webp"
-                    alt="side-image"
-                    width={100}
-                    height={100}
-                    className="object-conver rounded-md"
-                  />
-                </div>
-                <DialogTitle
-                  as="h3"
-                  className="text-lg font-bold text-white capitalize mt-4 underline"
-                >
-                  {make} {model} {year}
+
+                <DialogTitle className="text-2xl font-bold capitalize mt-5">
+                  {car.make} {car.model}{" "}
+                  <span className="text-gray-500 text-lg">{car.year}</span>
                 </DialogTitle>
 
-                {/* Car detaisl */}
-                {Object.entries(car).map(([key, value]) => (
-                  <div
-                    className="flex justify-between gap-5 w-full text-right text-white/80"
-                    key={key}
-                  >
-                    <h4 className="font-semibold capitalize">
-                      {key.replace("_", " ")}:
-                    </h4>
-                    <p className="font-bold capitalize">{value}</p>
-                  </div>
-                ))}
+                <div className="mt-4 space-y-1">
+                  {filteredEntries.map(([key, value]) => (
+                    <div
+                      className="flex justify-between py-1.5 border-b border-gray-100 last:border-0"
+                      key={key}
+                    >
+                      <span className="text-gray-500 text-sm">
+                        {displayLabels[key] || key.replace(/_/g, " ")}
+                      </span>
+                      <span className="font-semibold text-sm capitalize">
+                        {value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
 
-                <div className="mt-4">
-                  <Button
-                    className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                <div className="flex gap-3 mt-6">
+                  <button
                     onClick={closeModal}
+                    className="flex-1 py-2.5 px-4 rounded-full border border-gray-300 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition-colors"
                   >
                     Go Back
-                  </Button>
+                  </button>
+                  <button
+                    onClick={() => setRentOpen(true)}
+                    className="flex-1 py-2.5 px-4 rounded-full bg-blue-500 text-white font-semibold text-sm hover:bg-blue-600 transition-colors"
+                  >
+                    Rent Now — ${rentPrice}/day
+                  </button>
                 </div>
               </DialogPanel>
             </div>
           </div>
         </Dialog>
       </Transition>
+
+      <RentModal
+        isOpen={rentOpen}
+        closeModal={() => setRentOpen(false)}
+        car={car}
+        dailyRate={rentPrice}
+      />
     </>
   );
-}
+};
 
-export default CarDetails
+export default CarDetails;
