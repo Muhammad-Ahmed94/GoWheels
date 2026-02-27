@@ -1,7 +1,6 @@
-'use client'
+"use client";
 
-import { CustomButtonProps } from '@/types'
-import React, { MouseEventHandler } from 'react'
+import React, { MouseEventHandler } from "react";
 
 const CustomButton = ({
   title,
@@ -24,4 +23,4 @@ const CustomButton = ({
   );
 };
 
-export default CustomButton
+export default CustomButton;
