@@ -23,7 +23,7 @@ const Hero = () => {
         <CustomButton
           title="Explore cars"
           containerStyles="bg-blue-500 text-white rounded mt-10"
-          handleClick={handleScroll}
+          // handleClick={handleScroll}
         />
       </div>
 
@@ -38,7 +38,9 @@ const Hero = () => {
           />
         </div>
         {/* <div className="hero__image-overlay" /> also include bg-hero-bg in globals css */}
-        <div className="hero__image-overlay"><Image src='/hero-bg.webp' alt="hero-overlay" fill /></div>
+        <div className="hero__image-overlay">
+          <Image src="/hero-bg.webp" alt="hero-overlay" fill />
+        </div>
       </div>
     </div>
   );
